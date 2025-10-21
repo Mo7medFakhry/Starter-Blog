@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\ThemeController;
 use Illuminate\Support\Facades\Route;
 use Psy\Output\Theme;
@@ -22,6 +23,8 @@ Route::controller(ThemeController::class)->name('theme.')->group(function () {
     Route::get('/contact', 'contact')->name('contact');
     Route::get('/single-blog', 'singleBlog')->name('single-blog');
 });
+
+Route::post('/subscribe/store' , [SubscriberController::class , 'store'])->name('subscribe.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
