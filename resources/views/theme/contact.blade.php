@@ -6,7 +6,7 @@
 
 @section('content')
 
-        @include('theme.partials.hero', ['title' => 'Contact'])
+    @include('theme.partials.hero', ['title' => 'Contact'])
 
     <!-- ================ contact section start ================= -->
     <section class="section-margin--small section-margin">
@@ -49,32 +49,32 @@
                                 <div class="form-group">
                                     <input class="form-control" name="name" id="name" type="text"
                                         placeholder="Enter your name" value="{{old('name') }}">
-                                        @error('name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                    @error('name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" name="email" id="email" type="email"
                                         placeholder="Enter email address" value={{ old('email') }}>
-                                        @error('email')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                    @error('email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" name="subject" id="subject" type="text"
                                         placeholder="Enter Subject" value="{{ old('subject') }}">
-                                        @error('subject')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                    @error('subject')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-lg-7">
                                 <div class="form-group">
                                     <textarea class="form-control different-control w-100" name="message" id="message"
-                                        cols="30" rows="5" placeholder="Enter Message" value="{{ old('message') }}" ></textarea>
-                                        @error('message')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                        cols="30" rows="5" placeholder="Enter Message"> {{ old('message') }}</textarea>
+                                    @error('message')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -89,4 +89,3 @@
     <!-- ================ contact section end ================= -->
 
 @endsection
-

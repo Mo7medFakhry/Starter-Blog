@@ -8,11 +8,14 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    public function store(StoreContactRequest $request)
+    public function store(Request $request)
     {
-
-        dd($request);
-        $data = $request->validated();
+        $data = $request->validate([
+            'email' => 'required|email',
+            'name' => 'required|string',
+            'subject' => 'required',
+            'message' => 'required',
+        ]);
 
         Contact::create($data);
 
