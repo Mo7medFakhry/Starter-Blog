@@ -41,22 +41,21 @@ class BlogController extends Controller
 
         //image upload
         //1.get image
-        $image = $request->image;
-
-        //2.change image name
+        $image = $request->file('image');
+        //2.change it's current name
         $newImageName = time() . '-' . $image->getClientOriginalName();
 
-        //3.move image to folder
-        $image->storeAs('blogs', $newImageName , 'public');
+        //3.move image to folder project
+        $image->storeAs('blogs', $newImageName, 'public');
 
-        //4.save new name to database
+        //4.save new name to database record
         $data['image'] = $newImageName;
         $data['user_id'] = Auth::user()->id;
 
         //create blog
         Blog::create($data);
 
-        return redirect()->route('theme.blogs.create')->with('blogCreatedStatus', 'Blog created successfully');
+        return redirect()->back()->with('blogCreatedStatus', 'Blog created successfully');
     }
 
     /**

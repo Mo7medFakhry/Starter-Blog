@@ -17,44 +17,42 @@
                         </div>
                     @endif
                     <form action="{{ route('blogs.store') }}" class="form-contact contact_form" method="post"
-                        novalidate="novalidate">
+                        novalidate="novalidate" enctype="multipart/form-data">
                         @csrf
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <input class="form-control border" name="name" type="text" placeholder="Enter your name"
-                                        value="{{old('name') }}">
-                                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                                </div>
 
-                                <div class="form-group">
-                                    <input class="form-control border" name="image" type="file">
-                                    <x-input-error :messages="$errors->get('image')" class="mt-2" />
-                                </div>
-
-                                <div class="form-group">
-                                    <select class="form-control border" name="category_id" type="select"
-                                        value="{{ old('category_id') }}">
-                                        @if (count($categories) > 0)
-                                            @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}"> {{ $category->name }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                    <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
-                                </div>
-
-                                <div class="form-group">
-                                    <textarea class="w-100 border " name="description" placeholder="Enter your Description"
-                                        rows="5" {{ old('description') }}> </textarea>
-                                    <x-input-error :messages="$errors->get('description')" class="mt-2" />
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <input class="form-control border" name="name" type="text" placeholder="Enter your Blog Title"
+                                value="{{old('name') }}">
+                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
+
+                        <div class="form-group">
+                            <input class="form-control border" name="image" type="file">
+                            <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control border" name="category_id" placeholder="Enter your Category "
+                                value="{{old('category_id') }}">
+                                <option value="">Select Category</option>
+                                @if (count($categories) > 0)
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }} </option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                        </div>
+
+                        <div class="form-group">
+                            <textarea class="w-100 border" name="description" placeholder="Enter your Blog Title" rows="5">
+                                    {{ old('description') }} </textarea>
+                            <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                        </div>
+
+
                         <div class="form-group text-center text-md-right mt-3">
-                            <div class="flex items-center justify-end mt-4">
-                                <button type="submit" class="button button--active button-contactForm">Create</button>
-                            </div>
+                            <button type="submit" class="button button--active button-contactForm">Create</button>
                         </div>
                     </form>
                 </div>
