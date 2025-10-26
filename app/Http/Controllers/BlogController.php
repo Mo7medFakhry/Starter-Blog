@@ -44,15 +44,13 @@ class BlogController extends Controller
         $image = $request->file('image');
         //2.change it's current name
         $newImageName = time() . '-' . $image->getClientOriginalName();
-
         //3.move image to folder project
         $image->storeAs('blogs', $newImageName, 'public');
-
         //4.save new name to database record
         $data['image'] = $newImageName;
         $data['user_id'] = Auth::user()->id;
 
-        //create blog
+        //create new blog record
         Blog::create($data);
 
         return redirect()->back()->with('blogCreatedStatus', 'Blog created successfully');
