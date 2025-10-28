@@ -10,11 +10,16 @@
     <section class="section-margin--small section-margin">
         <div class="container">
             <div class="row">
+                @if (session('blogDeleteStatus'))
+                    <div class="alert alert-success">
+                        {{ session('blogDeleteStatus') }}
+                    </div>
+                @endif
                 <div class="col-12">
                     <table class="table table-striped table-dark">
                         <thead>
                             <tr>
-                                <th scope="col" >#</th>
+                                <th scope="col">#</th>
                                 <th scope="col">Title</th>
                                 <th scope="col">Action</th>
 
@@ -26,13 +31,19 @@
                                     <tr>
                                         <th scope="row">{{ ++$key}}</th>
                                         <td>
-                                            <a href="{{ route('blogs.show', ['blog' => $blog]) }}" target="_blank">{{ $blog->name }}</a>
+                                            <a href="{{ route('blogs.show', ['blog' => $blog]) }}"
+                                                target="_blank">{{ $blog->name }}</a>
                                         </td>
                                         <td>
-                                            <a href="{{ route('blogs.edit', ['blog' => $blog]) }}" class="btn btn-sm btn-primary mr-2">Edit</a>
-                                            <a href="{{ route('blogs.destroy', ['blog' => $blog]) }}" class="btn btn-sm btn-danger mr-2">Delete</a>
+                                            <a href="{{ route('blogs.edit', ['blog' => $blog]) }}"
+                                                class="btn btn-sm btn-primary mr-2">Edit</a>
+                                            <form class="d-inline" method="post" action="{{ route('blogs.destroy', ['blog' => $blog]) }}"
+                                                    id="delete_blog">
+                                                @csrf
+                                                @method('DELETE')
+                                                <a href="javascript:$('form#delete_blog').submit();" class="btn btn-sm btn-danger mr-2">Delete</a>
+                                            </form>
                                         </td>
-
                                     </tr>
                                 @endforeach
                             @endif
