@@ -23,14 +23,14 @@ $headerCategories = \App\Models\Category::get();
                         <li class="nav-item @yield('home-active')"><a class="nav-link"
                                 href="{{route('theme.index')  }}">Home</a></li>
                         <li class="nav-item  @yield('category-active') submenu dropdown">
-                            <a href="{{ route('theme.category') }}" class="nav-link dropdown-toggle"
+                            <a href="#" class="nav-link dropdown-toggle"
                                 data-toggle="dropdown" role="button" aria-haspopup="true"
                                 aria-expanded="false">Categories</a>
                             @if (count($headerCategories) > 0)
                                 <ul class="dropdown-menu">
                                     @foreach ($headerCategories as $category)
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('theme.category') }}">{{ $category->name}}</a>
+                                            <a class="nav-link" href="{{ route('theme.category' ,['id' => $category->id]) }}">{{ $category->name}}</a>
                                         </li>
                                     @endforeach ()
                                 </ul>
@@ -54,12 +54,12 @@ $headerCategories = \App\Models\Category::get();
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                     aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="blog-details.html">My Blogs</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('blogs.my-blogs') }}">My Blogs</a></li>
 
                                     <li class="nav-item">
-                                        <form action="{{ route('logout') }}" method="post">
+                                        <form action="{{ route('logout') }}" method="post" id="logout_form">
                                             @csrf
-                                            <a class="nav-link" href="javascript:$('form').submit();">Log Out </a>
+                                            <a class="nav-link" href="javascript:$('form#logout_form').submit();">LogOut </a>
                                         </form>
                                     </li>
                                 </ul>

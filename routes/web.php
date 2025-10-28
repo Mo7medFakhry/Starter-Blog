@@ -21,19 +21,20 @@ use Psy\Output\Theme;
 
 Route::controller(ThemeController::class)->name('theme.')->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::get('/category', 'category')->name('category');
+    Route::get('/category/{id}', 'category')->name('category');
     Route::get('/contact', 'contact')->name('contact');
-    Route::get('/single-blog', 'singleBlog')->name('single-blog');
+  //  Route::get('/single-blog', 'singleBlog')->name('single-blog');
 });
 
 //Subscribe Content
-Route::post('/subscribe/store' , [SubscriberController::class , 'store'])->name('subscribe.store');
+Route::post('/subscribe/store', [SubscriberController::class, 'store'])->name('subscribe.store');
 
 //Contact Content
-Route::post('/contact/store' , [ContactController::class , 'store'])->name('contact.store');
+Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.store');
 
 //Blog Content
-Route::resource('blogs' ,BlogController::class);
+Route::get('/my-blogs' , [BlogController::class , 'myBlogs'])->name('blogs.my-blogs');
+Route::resource('blogs', BlogController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -45,4 +46,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

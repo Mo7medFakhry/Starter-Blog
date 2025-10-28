@@ -13,7 +13,7 @@ class BlogController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only(['create']);
+        $this->middleware('auth')->only(['create' , 'myBlogs']);
     }
     /**
      * Display a listing of the resource.
@@ -59,23 +59,24 @@ class BlogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Blog $blog)
     {
-        //
+        return view('theme.single-blog' , compact('blog'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Blog $blog)
     {
-        //
+        $categories = Category::get();
+        return view('theme.blogs.edit', compact('categories' , 'blog'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BLog $blog)
     {
         //
     }
@@ -86,5 +87,14 @@ class BlogController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * Display My Blogs from storage.
+     */
+    public function myBlogs()
+    {
+        $blogs = Blog::where('user_id', Auth::user()->id)->paginate(10);
+        return view('theme.blogs.my-blogs', compact('blogs'));
     }
 }
