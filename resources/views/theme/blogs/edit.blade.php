@@ -53,7 +53,7 @@
 
 
                         <div class="form-group text-center text-md-right mt-3">
-                            <button type="submit" class="button button--active button-contactForm">Create</button>
+                            <button type="submit" class="button button--active button-contactForm">Update</button>
                         </div>
                     </form>
                 </div>
