@@ -24,7 +24,6 @@ Route::controller(ThemeController::class)->name('theme.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/category/{id}', 'category')->name('category');
     Route::get('/contact', 'contact')->name('contact');
-  //  Route::get('/single-blog', 'singleBlog')->name('single-blog');
 });
 
 //Subscribe Content
@@ -35,19 +34,9 @@ Route::post('/contact/store', [ContactController::class, 'store'])->name('contac
 
 //Blog Content
 Route::get('/my-blogs' , [BlogController::class , 'myBlogs'])->name('blogs.my-blogs');
-Route::resource('blogs', BlogController::class);
+Route::resource('blogs', BlogController::class)->except('index');
 
 //comment Route
 Route::post('/comment/store', [CommentController::class, 'store'])->name('comment.store');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
 require __DIR__ . '/auth.php';

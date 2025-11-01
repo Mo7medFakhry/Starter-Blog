@@ -11,7 +11,8 @@ class ThemeController extends Controller
     public function index()
     {
         $blogs = Blog::paginate(4);
-        return view('theme.index', compact('blogs'));
+        $recentBlogs = Blog::latest()->take(5)->get();
+        return view('theme.index', compact('blogs' , 'recentBlogs'));
     }
 
     public function category($id)
